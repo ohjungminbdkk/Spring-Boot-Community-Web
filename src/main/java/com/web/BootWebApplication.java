@@ -46,9 +46,9 @@ public class BootWebApplication implements WebMvcConfigurer {
 
 			IntStream.rangeClosed(1, 200).forEach(index ->
 				boardRepository.save(Board.builder()
-						.title("ê²Œì‹œê¸€"+index)
-						.subTitle("ìˆœì„œ"+index)
-						.content("ì»¨í…ì¸ ")
+						.title("°Ô½Ã±Û"+index)
+						.subTitle("¼ø¼­"+index)
+						.content("ÄÁÅÙÃ÷")
 						.boardType(BoardType.free)
 						.createdDate(LocalDateTime.now())
 						.updatedDate(LocalDateTime.now())

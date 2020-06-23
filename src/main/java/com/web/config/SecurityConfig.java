@@ -1,3 +1,4 @@
+
 package com.web.config;
 
 import com.web.oauth.CustomOAuth2Provider;
@@ -74,8 +75,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         registrations.add(CustomOAuth2Provider.KAKAO.getBuilder("kakao")
                 .clientId(kakaoClientId)
-                .clientSecret("test") //í•„ìš”ì—†ëŠ” ê°’ì¸ë° nullì´ë©´ ì‹¤í–‰ì´ ì•ˆë˜ë„ë¡ ì„¤ì •ë˜ì–´ ìˆìŒ
-                .jwkSetUri("test") //í•„ìš”ì—†ëŠ” ê°’ì¸ë° nullì´ë©´ ì‹¤í–‰ì´ ì•ˆë˜ë„ë¡ ì„¤ì •ë˜ì–´ ìˆìŒ
+                .clientSecret("test") //ÇÊ¿ä¾ø´Â °ªÀÎµ¥ nullÀÌ¸é ½ÇÇàÀÌ ¾ÈµÇµµ·Ï ¼³Á¤µÇ¾î ÀÖÀ½
+                .jwkSetUri("test") //ÇÊ¿ä¾ø´Â °ªÀÎµ¥ nullÀÌ¸é ½ÇÇàÀÌ ¾ÈµÇµµ·Ï ¼³Á¤µÇ¾î ÀÖÀ½
                 .build());
 
         return new InMemoryClientRegistrationRepository(registrations);

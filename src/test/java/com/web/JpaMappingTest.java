@@ -24,47 +24,36 @@ import static org.hamcrest.core.Is.is;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class JpaMappingTest {
-    private final String boardTestTitle = "í…ŒìŠ¤íŠ¸";
-    private final String email = "test@gmail.com";
+	private final String boardTestTitle = "Å×½ºÆ®";
+	private final String email = "test@gmail.com";
 
-    @Autowired
-    UserRepository userRepository;
+	@Autowired
+	UserRepository userRepository;
 
-    @Autowired
-    BoardRepository boardRepository;
+	@Autowired
+	BoardRepository boardRepository;
 
+	@Before
+	public void init() {
+		User user = userRepository.save(
+				User.builder().name("havi").password("test").email(email).createdDate(LocalDateTime.now()).build());
 
-    @Before
-    public void init() {
-        User user = userRepository.save(User.builder()
-                .name("havi")
-                .password("test")
-                .email(email)
-                .createdDate(LocalDateTime.now())
-                .build());
+		boardRepository
+				.save(Board.builder().title(boardTestTitle).subTitle("¼­ºê Å¸ÀÌÆ²").content("ÄÁÅÙÃ÷").boardType(BoardType.free)
+						.createdDate(LocalDateTime.now()).updatedDate(LocalDateTime.now()).user(user).build());
+	}
 
-        boardRepository.save(Board.builder()
-                .title(boardTestTitle)
-                .subTitle("ì„œë¸Œ íƒ€ì´í‹€")
-                .content("ì»¨í…ì¸ ")
-                .boardType(BoardType.free)
-                .createdDate(LocalDateTime.now())
-                .updatedDate(LocalDateTime.now())
-                .user(user).build());
-    }
+	@Test
+	public void Á¦´ë·Î_»ı¼º_µÆ´ÂÁö_Å×½ºÆ®() {
+		User user = userRepository.findByEmail(email);
+		assertThat(user.getName(), is("havi"));
+		assertThat(user.getPassword(), is("test"));
+		assertThat(user.getEmail(), is(email));
 
-    @Test
-    public void ì œëŒ€ë¡œ_ìƒì„±_ëëŠ”ì§€_í…ŒìŠ¤íŠ¸() {
-        User user = userRepository.findByEmail(email);
-        assertThat(user.getName(), is("havi"));
-        assertThat(user.getPassword(), is("test"));
-        assertThat(user.getEmail(), is(email));
-
-        Board board = boardRepository.findByUser(user);
-        assertThat(board.getTitle(), is(boardTestTitle));
-        assertThat(board.getSubTitle(), is("ì„œë¸Œ íƒ€ì´í‹€"));
-        assertThat(board.getContent(), is("ì»¨í…ì¸ "));
-        assertThat(board.getBoardType(), is(BoardType.free));
-    }
-
+		Board board = boardRepository.findByUser(user);
+		assertThat(board.getTitle(), is(boardTestTitle));
+		assertThat(board.getSubTitle(), is("¼­ºê Å¸ÀÌÆ²"));
+		assertThat(board.getContent(), is("ÄÁÅÙÃ÷"));
+		assertThat(board.getBoardType(), is(BoardType.free));
+	}
 }

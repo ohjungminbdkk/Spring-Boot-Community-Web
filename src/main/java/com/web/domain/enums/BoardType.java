@@ -4,8 +4,8 @@ package com.web.domain.enums;
  * Created by KimYJ on 2017-07-12.
  */
 public enum BoardType {
-    notice("ê³µì§€ì‚¬í•­"),
-    free("ììœ ê²Œì‹œíŒ");
+    notice("°øÁö»çÇ×"),
+    free("ÀÚÀ¯°Ô½ÃÆÇ");
 
     private String value;
 
